@@ -1,9 +1,8 @@
-#the author of this code is Shift_ 
-#I'll upgrade it
-#https://www.daniweb.com/programming/software-development/threads/361480/phonebook-program
+#I upgrade the code of Shift_ 
+#(https://www.daniweb.com/programming/software-development/threads/361480/phonebook-program)
 
 import os
-#Модуль для работы с OS
+
 class Phonebook:
     def __init__(self):
         self.phonebook = {}
@@ -17,6 +16,16 @@ class Phonebook:
         for line in file.readlines():
             name, number = line.strip().split()
             self.phonebook[name] = number
+        file.close()
+
+    def createFile(self):
+        #Check if the file exists on your computer and create the file if it does not exist
+        if os.path.exists(self.phonebook_file): 
+            print("PHONEBOOK ALREADY EXISTS")
+            file = open(self.phonebook_file, 'r')
+        else:
+            file = open(self.phonebook_file, 'w')
+            print("PHONEBOOK CREATED SUCCESSFULLY")
         file.close()
         
     def addEntry(self):
