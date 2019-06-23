@@ -33,21 +33,22 @@ class Phonebook:
         #Prompt the user for the details of the new entry
         name = input("ENTER NAME: ")
         number =input("ENTER NUMBER: ")
-        #Create a string to be written to the file
+       if not name or number:
+            print("EMPTY STRING. NEW CONTACT IS NOT CREATED")
+            return
+       
+        #Создать строку для записи в файл
         new_entry = name + '\t' + number + '\n'
-        if not new_entry:
-            del self.phonebook[new_entry]
-
-        #Write the string to the file
+        #Записать строку в файл
         file = open(self.phonebook_file, 'a')
         file.write(new_entry)
         file.close()
+        print("NEW CONTACT CREATED SUCCESSFULLY")
         
     def readAll(self):
         self.loadAll()
-        #Print out the entire phonebook dictionary
+        #Распечатать весь словарь телефонной книги
         for name, number in self.phonebook.items():
-            sorted(name, key=lambda x: x.split(" ")[-1])
             print(name, " : ", number)
         if len(self.phonebook) == 0:
             print("PHONEBOOK IS EMPTY")
