@@ -28,7 +28,7 @@ class Phonebook:
             print("PHONEBOOK CREATED SUCCESSFULLY")
         file.close()
         
-    def addEntry(self):
+    def addContact(self):
         self.loadAll()
         #Prompt the user for the details of the new entry
         name = input("ENTER NAME: ")
@@ -53,18 +53,18 @@ class Phonebook:
         if len(self.phonebook) == 0:
             print("PHONEBOOK IS EMPTY")
             
-    def searchEntry(self):
+    def searchContact(self):
         self.loadAll()
         #Prompt the user for the name to search for, and search the phonebook dictionary
         search = input("ENTER NAME TO SEARCH FOR: ")
         if search in self.phonebook.keys():
             print(search, " : ", self.phonebook[search])
         else:
-            print("ENTRY NOT FOUND")
+            print("CONTACT NOT FOUND")
             
-    def deleteEntry(self):
+    def deleteContact(self):
         self.loadAll()
-        entry_to_delete = input("ENTER NAME OF ENTRY TO DELETE: ")
+        entry_to_delete = input("ENTER NAME OF CONTACT TO DELETE: ")
         if entry_to_delete in self.phonebook.keys():
             del self.phonebook[entry_to_delete]
             file = open(self.phonebook_file, 'w')
@@ -72,24 +72,24 @@ class Phonebook:
                 string = name + '\t' + number + '\n'
                 file.write(string)
             file.close()
-            print("ENTRY DELETED SUCCESSFULLY")
+            print("CONTACT DELETED SUCCESSFULLY")
         else:
-            print("ENTRY NOT FOUND")
+            print("CONTACT NOT FOUND")
     def exitProgram(self):
         os._exit
     def menu(self):
         print("""\
        -МЕНЮ-
-1) READ ALL ENTRIES
-2) ADD AN ENTRY
-3) DELETE AN ENTRY
-4) LOOK UP AN ENTRY
-5) Exit\n""")
+1) READ ALL CONTACTS
+2) ADD AN CONTACT
+3) DELETE AN CONTACT
+4) LOOK UP AN CONTACT
+5) EXIT\n""")
         choice = input("ENTER CHOICE: ")
         choice_menu = {'1' : self.readAll,
-                       '2' : self.addEntry,
-                       '3' : self.deleteEntry,
-                       '4' : self.searchEntry,
+                       '2' : self.addContact,
+                       '3' : self.deleteContact,
+                       '4' : self.searchContact,
                        '5' : self.exitProgram}
         if choice not in choice_menu.keys():
             print("PLEASE ENTER A VALID CHOICE")
