@@ -60,8 +60,11 @@ ENTER THE FILE NAME WITHOUT THE EXTENSION: """)
     def readAll(self):
         self.loadAll()
         # Print out the entire phonebook dictionary
-        for name, number in self.phonebook.items():
-            print(name, " : ", number)
+        list_keys = list(self.phonebook.keys())
+        # Converting a dictionary to a list, sorting the list alphabetically
+        list_keys.sort()
+        for i in list_keys:
+            print(i, ':', self.phonebook[i])
         if len(self.phonebook) == 0:
             print("PHONEBOOK IS EMPTY")
             
