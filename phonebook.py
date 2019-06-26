@@ -1,5 +1,5 @@
-#I upgrade the code of Shift_ 
-#(https://www.daniweb.com/programming/software-development/threads/361480/phonebook-program)
+# I upgrade the code of Shift_ 
+# (https://www.daniweb.com/programming/software-development/threads/361480/phonebook-program)
 
 import os
 
@@ -19,7 +19,7 @@ ENTER THE FILE NAME WITHOUT THE EXTENSION: """)
             file = open(self.phonebook_file, 'w')
             print("PHONEBOOK CREATED SUCCESSFULLY")
 
-    def loadAll(self):
+    def load_all(self):
         # Clear the phonebook dictionary
         self.phonebook.clear()
         
@@ -30,7 +30,7 @@ ENTER THE FILE NAME WITHOUT THE EXTENSION: """)
             self.phonebook[name] = number
         file.close()
 
-    def openFile(self):
+    def open_file(self):
         # Check if the file exists on your computer and create the file if it does not exist
         file_name = input("ENTER THE FILE NAME WITHOUT THE EXTENSION: ")
         self.phonebook_file = file_name + '.txt'
@@ -41,14 +41,14 @@ ENTER THE FILE NAME WITHOUT THE EXTENSION: """)
             file = open(self.phonebook_file, 'w')
             print("PHONEBOOK CREATED SUCCESSFULLY")
         
-    def addContact(self):
-        self.loadAll()
+    def add_contact(self):
+        self.load_all()
         # Prompt the user for the details of the new entry
         name = input("ENTER NAME: ")
         number =input("ENTER NUMBER: ")
         if (name == "" or number == ""):
             print("EMPTY STRING. NEW CONTACT IS NOT CREATED")
-
+            return
         # Create a string to be written to the file
         new_entry = name + '\t' + number + '\n'
         # Write the string to the file
@@ -57,8 +57,8 @@ ENTER THE FILE NAME WITHOUT THE EXTENSION: """)
         file.close()
         print("NEW CONTACT CREATED SUCCESSFULLY")
         
-    def readAll(self):
-        self.loadAll()
+    def read_all(self):
+        self.load_all()
         # Print out the entire phonebook dictionary
         list_keys = list(self.phonebook.keys())
         # Converting a dictionary to a list, sorting the list alphabetically
@@ -68,8 +68,8 @@ ENTER THE FILE NAME WITHOUT THE EXTENSION: """)
         if len(self.phonebook) == 0:
             print("PHONEBOOK IS EMPTY")
             
-    def searchContact(self):
-        self.loadAll()
+    def search_contact(self):
+        self.load_all()
         # Prompt the user for the name to search for, and search the phonebook dictionary
         search = input("ENTER NAME TO SEARCH FOR: ")
         if search in self.phonebook.keys():
@@ -77,8 +77,8 @@ ENTER THE FILE NAME WITHOUT THE EXTENSION: """)
         else:
             print("CONTACT NOT FOUND")
             
-    def deleteContact(self):
-        self.loadAll()
+    def delete_contact(self):
+        self.load_all()
         entry_to_delete = input("ENTER NAME OF CONTACT TO DELETE: ")
         if entry_to_delete in self.phonebook.keys():
             del self.phonebook[entry_to_delete]
@@ -91,7 +91,7 @@ ENTER THE FILE NAME WITHOUT THE EXTENSION: """)
         else:
             print("CONTACT NOT FOUND")
 
-    def exitProgram(self):
+    def exit_program(self):
         os._exit
 
     def menu(self):
@@ -105,12 +105,12 @@ ENTER THE FILE NAME WITHOUT THE EXTENSION: """)
 5) LOOK UP AN CONTACT
 6) EXIT\n""")
             choice = input("ENTER CHOICE: ")
-            choice_menu = {'1' : self.openFile,
-                           '2' : self.readAll,
-                           '3' : self.addContact,
-                           '4' : self.deleteContact,
-                           '5' : self.searchContact,
-                           '6' : self.exitProgram}
+            choice_menu = {'1' : self.open_file,
+                           '2' : self.read_all,
+                           '3' : self.add_contact,
+                           '4' : self.delete_contact,
+                           '5' : self.search_contact,
+                           '6' : self.exit_program}
             if choice not in choice_menu.keys():
                 print("PLEASE ENTER A VALID CHOICE")
             elif choice == '6':
