@@ -49,6 +49,8 @@ ENTER THE FILE NAME WITHOUT THE EXTENSION: """)
         if (name == "" or number == ""):
             print("EMPTY STRING. NEW CONTACT IS NOT CREATED")
             return
+        if name in self.phonebook.keys():
+            print("CONTACT ALREADY EXISTS AND WILL BE REWRITTEN")
         # Create a string to be written to the file
         new_entry = name + '\t' + number + '\n'
         # Write the string to the file
