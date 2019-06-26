@@ -2,6 +2,7 @@
 # (https://www.daniweb.com/programming/software-development/threads/361480/phonebook-program)
 
 import os
+import re
 
 class Phonebook:
     def __init__(self): 
@@ -52,10 +53,10 @@ ENTER THE FILE NAME WITHOUT THE EXTENSION: """)
         if name in self.phonebook.keys():
             print("CONTACT ALREADY EXISTS AND WILL BE REWRITTEN")
         # Create a string to be written to the file
-        new_entry = name + '\t' + number + '\n'
+        new_contact = name + '\t' + number + '\n'
         # Write the string to the file
         file = open(self.phonebook_file, 'a')
-        file.write(new_entry)
+        file.write(new_contact)
         file.close()
         print("NEW CONTACT CREATED SUCCESSFULLY")
         
@@ -70,14 +71,31 @@ ENTER THE FILE NAME WITHOUT THE EXTENSION: """)
         if len(self.phonebook) == 0:
             print("PHONEBOOK IS EMPTY")
             
-    def search_contact(self):
+    def search_name(self):
         self.load_all()
-        # Prompt the user for the name to search for, and search the phonebook dictionary
-        search = input("ENTER NAME TO SEARCH FOR: ")
-        if search in self.phonebook.keys():
-            print(search, " : ", self.phonebook[search])
-        else:
-            print("CONTACT NOT FOUND")
+        # Prompt the user for the name to search for, and search the phonebook dictionary 
+        pattern = input("ENTER CONTACT NAME: ").strip()
+        list_keys = list(self.phonebook.keys())
+        # Converting a dictionary to a list, use regex for partial search
+        occurrences = 0
+        for i in list_keys:
+            if re.search(pattern, i):
+                occurrences += 1
+                print(i, ':', self.phonebook[i])
+        if occurrences == 0:
+                print("CONTACT NOT FOUND")
+
+    def search_number(self):
+        self.load_all()
+        # Prompt the user for the number to search for, and search the phonebook dictionary 
+        search = input("ENTER CONTACT NUMBER: ")
+        occurrences = 0
+        for name, number in self.phonebook.items():
+            if number == search:
+                occurrences += 1
+                print(name, " : ", number)
+        if occurrences == 0:
+                print("CONTACT NOT FOUND")
             
     def delete_contact(self):
         self.load_all()
@@ -104,18 +122,20 @@ ENTER THE FILE NAME WITHOUT THE EXTENSION: """)
 2) READ ALL CONTACTS
 3) ADD AN CONTACT
 4) DELETE AN CONTACT
-5) LOOK UP AN CONTACT
-6) EXIT\n""")
+5) SEARCH CONTACT BY NAME
+6) SEARCH CONTACT BY NUMBER
+7) EXIT\n""")
             choice = input("ENTER CHOICE: ")
             choice_menu = {'1' : self.open_file,
                            '2' : self.read_all,
                            '3' : self.add_contact,
                            '4' : self.delete_contact,
-                           '5' : self.search_contact,
-                           '6' : self.exit_program}
+                           '5' : self.search_name,
+                           '6' : self.search_number,
+                           '7' : self.exit_program}
             if choice not in choice_menu.keys():
                 print("PLEASE ENTER A VALID CHOICE")
-            elif choice == '6':
+            elif choice == '7':
                 break
             else:
                 choice_menu[choice]()
