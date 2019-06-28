@@ -1,2 +1,2 @@
 # phonebook
-my first task (python)
+first task (python)
