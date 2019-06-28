@@ -51,7 +51,13 @@ ENTER THE FILE NAME WITHOUT THE EXTENSION: """)
             print("EMPTY STRING. NEW CONTACT IS NOT CREATED")
             return
         if name in self.phonebook.keys():
-            print("CONTACT ALREADY EXISTS AND WILL BE REWRITTEN")
+            change_name = input("CONTACT ALREADY EXISTS. DO YOU WANT TO CHANGE IT? ENTER 'YES' or 'NO': ")
+            if change_name == "NO":
+                print("CONTACT WILL NOT BE OVERWRITTEN")
+                return
+            elif change_name == "YES":
+                print("OK. CONTACT WILL BE OVERWRITTEN")
+
         # Create a string to be written to the file
         new_contact = name + '\t' + number + '\n'
         # Write the string to the file
@@ -87,7 +93,7 @@ ENTER THE FILE NAME WITHOUT THE EXTENSION: """)
     def search_number(self):
         self.load_all()
         # Prompt the user for the number to search for, and search the phonebook dictionary 
-        pattern = input("ENTER CONTACT NUMBER: ")
+        pattern = input("ENTER CONTACT NUMBER: ").strip()
         occurrences = 0
         for name, number in self.phonebook.items():
             # Use regex for partial search
@@ -99,9 +105,9 @@ ENTER THE FILE NAME WITHOUT THE EXTENSION: """)
 
     def delete_contact(self):
         self.load_all()
-        entry_to_delete = input("ENTER NAME OF CONTACT TO DELETE: ")
-        if entry_to_delete in self.phonebook.keys():
-            del self.phonebook[entry_to_delete]
+        contact_to_delete = input("ENTER NAME OF CONTACT TO DELETE: ")
+        if contact_to_delete in self.phonebook.keys():
+            del self.phonebook[contact_to_delete]
             file = open(self.phonebook_file, 'w')
             for name, number in self.phonebook.items():
                 string = name + '\t' + number + '\n'
