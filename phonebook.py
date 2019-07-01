@@ -46,16 +46,19 @@ ENTER THE FILE NAME WITHOUT THE EXTENSION: """)
         self.load_all()
         # Prompt the user for the details of the new entry
         name = input("ENTER NAME: ")
+        if name == "":
+            print("EMPTY STRING. NEW CONTACT IS NOT CREATED")
+            return
         number =input("ENTER NUMBER: ")
-        if (name == "" or number == ""):
+        if number == "":
             print("EMPTY STRING. NEW CONTACT IS NOT CREATED")
             return
         if name in self.phonebook.keys():
             change_name = input("CONTACT ALREADY EXISTS. DO YOU WANT TO CHANGE IT? ENTER 'YES' or 'NO': ")
-            if change_name == "NO":
+            if change_name == "NO" or "no":
                 print("CONTACT WILL NOT BE OVERWRITTEN")
                 return
-            elif change_name == "YES":
+            elif change_name == "YES" or "yes":
                 print("OK. CONTACT WILL BE OVERWRITTEN")
 
         # Create a string to be written to the file
