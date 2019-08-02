@@ -7,18 +7,9 @@ import re
 class Phonebook:
     def __init__(self): 
         self.phonebook = {}
+        print("WELCOME TO THE PROGRAM 'THE PHONEBOOK'")
         # Prompt name of file
-        file_name = input("""\
-WELCOME TO THE PROGRAM 'THE PHONEBOOK'.
-NOW OPEN AN EXISTING BOOK OR CREATE A NEW ONE.
-ENTER THE FILE NAME WITHOUT THE EXTENSION: """)
-        self.phonebook_file = file_name + '.txt'
-        if os.path.exists(self.phonebook_file): 
-            print("PHONEBOOK ALREADY EXISTS")
-            return
-        else:
-            file = open(self.phonebook_file, 'w')
-            print("PHONEBOOK CREATED SUCCESSFULLY")
+        self.open_file()
 
     def load_all(self):
         # Clear the phonebook dictionary
